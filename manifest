@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 0.1
+apiversion: 2
+description: Dtector GeoFencing
+author: Hiroki Arai
+license: MIT License
+copyright: Copyright (c) 2014 by Hiroki Arai
+
+
+# these should not be edited
+name: DtectorGeoFencing
+moduleid: jp.dtector.geofencing
+guid: 08aa450e-02f1-4346-8823-ce247f44dc4d
+platform: iphone
+minsdk: 3.2.0.GA
