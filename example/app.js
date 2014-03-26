@@ -29,18 +29,20 @@ var DtectorGeoFencing = require('jp.dtector.geofencing');
 Ti.API.info("module is => " + DtectorGeoFencing);
 
 DtectorGeoFencing.addEventListener('enter', function(e) {
-  Ti.API.debug("enter!: " + e.identifier);
+  Ti.API.debug(JSON.stringify(e));
   alert("enter into " + e.identifier + "!!");
 });
 DtectorGeoFencing.addEventListener('exit', function(e) {
-  Ti.API.debug("exit!: " + e.identifier);
-  Ti.API.debug("exited from " + e.identifier + "!!");
+  Ti.API.debug(JSON.stringify(e));
+  alert("exited from " + e.identifier + "!!");
 });
 DtectorGeoFencing.addEventListener('monitor', function(e) {
-  Ti.API.debug("monitoring: " + e.identifier);
+  Ti.API.debug(JSON.stringify(e));
+  alert("monitoring " + e.identifier + "!!");
 });
 DtectorGeoFencing.addEventListener('fail', function(e) {
   Ti.API.debug(JSON.stringify(e));
+  alert("failed to monitor " + e.identifier + "...");
 });
 add = function(e) {
   DtectorGeoFencing.addRegion({

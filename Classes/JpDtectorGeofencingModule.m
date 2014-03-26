@@ -83,7 +83,11 @@ NSMutableArray *geofences;
     NSLog(@"[INFO] Entered Region - %@", region.identifier);
 
     NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:
-                       region.identifier, @"identifier", nil];
+      region.identifier, @"identifier",
+      NUMDOUBLE(region.center.latitude), @"latitude",
+      NUMDOUBLE(region.center.longitude), @"longitude",
+      NUMDOUBLE(region.radius), @"radius",
+      nil];
     [self fireEvent:@"enter" withObject:event];
 }
 
@@ -91,7 +95,11 @@ NSMutableArray *geofences;
     NSLog(@"[INFO] Exited Region - %@", region.identifier);
 
     NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:
-                       region.identifier, @"identifier", nil];
+      region.identifier, @"identifier",
+      NUMDOUBLE(region.center.latitude), @"latitude",
+      NUMDOUBLE(region.center.longitude), @"longitude",
+      NUMDOUBLE(region.radius), @"radius",
+      nil];
     [self fireEvent:@"exit" withObject:event];
 }
 
@@ -99,7 +107,11 @@ NSMutableArray *geofences;
     NSLog(@"[INFO] Started monitoring %@ region", region.identifier);
 
     NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:
-                       region.identifier, @"identifier", nil];
+      region.identifier, @"identifier",
+      NUMDOUBLE(region.center.latitude), @"latitude",
+      NUMDOUBLE(region.center.longitude), @"longitude",
+      NUMDOUBLE(region.radius), @"radius",
+      nil];
     [self fireEvent:@"monitor" withObject:event];
 }
 
@@ -107,8 +119,11 @@ NSMutableArray *geofences;
     NSLog(@"[INFO] Failed to monitoring region \"%@\" (%@)", region.identifier, error);
 
     NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:
-                       region.identifier, @"identifier",
-                       [error localizedDescription], @"error", nil];
+      region.identifier, @"identifier",
+      NUMDOUBLE(region.center.latitude), @"latitude",
+      NUMDOUBLE(region.center.longitude), @"longitude",
+      NUMDOUBLE(region.radius), @"radius",
+      [error localizedDescription], @"error", nil];
     [self fireEvent:@"fail" withObject:event];
 }
 
@@ -123,7 +138,7 @@ NSMutableArray *geofences;
 
     _locationManager = [[CLLocationManager alloc] init];
     [_locationManager setDelegate:self];
-    [_locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    [_locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
 
     NSLog(@"[INFO] %@",@"initialized location manager.");
 }
