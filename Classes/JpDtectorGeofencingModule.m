@@ -121,11 +121,6 @@ NSMutableArray *geofences;
         return;
     }
 
-    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
-        NSLog(@"[WARN] Couldn't turn on monitoring: Location services not authorised.");
-        return;
-    }
-
     _locationManager = [[CLLocationManager alloc] init];
     [_locationManager setDelegate:self];
     [_locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
@@ -214,7 +209,7 @@ NSMutableArray *geofences;
     ENSURE_SINGLE_ARG(identifier, NSString);
 
     NSMutableArray *reservations = [[[NSMutableArray alloc] init] autorelease];
-    for (CLRegion *region in geofences) {
+    for (CLRegion *region in [[_locationManager monitoredRegions] allObjects]) {
         if ([region.identifier isEqualToString:identifier]) {
             [_locationManager stopMonitoringForRegion:region];
             [reservations addObject:region];

@@ -16,6 +16,13 @@ var removeBtn = Ti.UI.createButton({
   top:60
 });
 win.add(removeBtn);
+var listBtn = Ti.UI.createButton({
+  title:'list',
+  color:'#ff0000',
+  height:47,
+  top:90
+});
+win.add(listBtn);
 win.open();
 
 var DtectorGeoFencing = require('jp.dtector.geofencing');
@@ -42,7 +49,11 @@ add = function(e) {
     longitude: 139.701535,
     radius: 100
   });
-  console.log(JSON.stringify(DtectorGeoFencing.monitoredRegions()));
 }
 btn.addEventListener('click', add);
-removeBtn.addEventListener('click', function() { DtectorGeoFencing.removeRegion('shibuya station'); });
+removeBtn.addEventListener('click', function() {
+  DtectorGeoFencing.removeRegion('shibuya station');
+});
+listBtn.addEventListener('click', function() {
+  console.log(JSON.stringify(DtectorGeoFencing.monitoredRegions()));
+});
